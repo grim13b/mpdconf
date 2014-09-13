@@ -1,0 +1,38 @@
+port "6600"
+music_directory "~/Music/"
+playlist_directory "~/.mpd/playlists"
+db_file "~/.mpd/mpd.db"
+log_file "~/.mpd/mpd.log"
+pid_file "~/.mpd/pid"
+state_file "~/.mpd/state"
+user "grim3lt"
+audio_output_format "192000:24:2"
+#samplerate_converter "soxr very high"
+samplerate_converter "Best Sinc Interpolator"
+#audio_buffer_size "128000"
+audio_buffer_size "4096"
+buffer_before_play "30%"
+
+audio_output {
+    type "alsa"
+    name "ALSA Device"
+    use_mmap "yes"
+    dsd_usb "yes"
+    device "hw:1,0"
+    mixer_type "disabled"
+    auto_resample "no"
+    auto_format "no"
+}
+
+decoder {
+    plugin "dsdiff"
+    enabled "yes"
+    tagsupport "id3pref"
+}
+
+decoder {
+    plugin "dsdiff_native"
+    enabled "yes"
+    dsdsampleformat "32"
+    tagsupport "id3pref"
+}
