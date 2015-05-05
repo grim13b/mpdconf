@@ -6,22 +6,24 @@ log_file "~/.mpd/mpd.log"
 pid_file "~/.mpd/pid"
 state_file "~/.mpd/state"
 user "grim3lt"
-#audio_output_format "192000:24:2"
+audio_output_format "352800:24:2"
 samplerate_converter "soxr very high"
-#samplerate_converter "Best Sinc Interpolator"
-#audio_buffer_size "128000"
-audio_buffer_size "8192"
-buffer_before_play "30%"
+audio_buffer_size "16347"
+buffer_before_play "10%"
 
 audio_output {
     type "alsa"
+    priority "FIFO:54"
     name "ALSA Device"
-    use_mmap "yes"
+#    use_mmap "yes"
     dsd_usb "yes"
     device "hw:1,0"
-    mixer_type "disabled"
+    mixer_device "hw:1"
+    mixer_type "software"
     auto_resample "no"
     auto_format "no"
+    buffer_time "500000"
+    period_time "725624"
 }
 
 decoder {
@@ -35,4 +37,9 @@ decoder {
     enabled "yes"
     dsdsampleformat "32"
     tagsupport "id3pref"
+}
+
+decoder {
+    plugin "sndfile"
+    enabled "no"
 }
